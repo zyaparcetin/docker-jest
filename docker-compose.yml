@@ -8,7 +8,7 @@ services:
     environment:
      #- MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
      #- MONGODB_CONNECTION_STRING=mongodb://mongo/express-mongo-docker-project 
-      - MONGODB_CONNECTION_STRING=mongodb://mongo/mongodb
+      - MONGODB_CONNECTION_STRING=mongodb://mongo/mongodb  # buraya ne yazmaliyim?
     ports:
       - 3000:3000
       - 35729:35729
