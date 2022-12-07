@@ -20,6 +20,26 @@ describe('User endpoints', () => {
 
     expect(userExist).toBe(true)
   })
+
+  it('Add a product to basket', async () => {
+    const userToCreate = {
+      name: `Somename${Date.now()}`,
+      age: 12,
+    }
+    const productToCreate = {
+      name: 'Somename',
+      price: 15,
+    }
+
+    const createdUser = (await request(app).post('/users').send(userToCreate)).body
+    const createdProduct = (await request(app).post('/products').send(productToCreate)).body
+
+    expect(createdUser.name).toBe(userToCreate.name)
+    expect(createdUser.age).toBe(userToCreate.age)
+
+    expect(createdProduct.name).toBe(productToCreate.name)
+    expect(createdProduct.price).toBe(productToCreate.price)
+  })
 })
 
 /* const request = require('supertest')
