@@ -1,6 +1,39 @@
-@startuml Person 
-class Person {
-  name: string
+@startuml Joy Toys Class Diagram
+class User {
+  name: string 
   age: number
+  likes: [Product]
+  basket: [Basket]
+  reviews: [Reviews]
+
+  constructor(name: string, age: number)
+  greet()
+  likeProduct(product: Product)
+  addToBasket(product: Product)
+  review(product: Product, text: string, rate: number)
 }
+
+class Product {
+  name: string
+  price: number
+  likedBy: [User]
+  reviews: [Reviews]
+
+  constructor(name: string, price: number)
+}
+
+class Review {
+  text: string
+  rate: number
+  author: string
+
+  constructor(text: string, rate: number, author: string)
+}
+
+User "1"  --> "0..*"  Product : adds to basket, likes, reviews
+Product --> "0..*" User : liked by, reviewed by
+User --> Review : reviews, rates
+Product --> Review : has
+
+
 @enduml
