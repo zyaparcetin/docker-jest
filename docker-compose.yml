@@ -1,14 +1,14 @@
 version: '3'
 services:
   app:
-    image: sose-sw207
+    image: joy-toys
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-     #- MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
+     - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
      #- MONGODB_CONNECTION_STRING=mongodb://mongo/express-mongo-docker-project 
-      - MONGODB_CONNECTION_STRING=mongodb://mongo/mongodb  # buraya ne yazmaliyim?
+     # - MONGODB_CONNECTION_STRING=mongodb://mongo/joy-toys-local
     ports:
       - 3000:3000
       - 35729:35729
@@ -18,4 +18,4 @@ services:
   mongo:
     image: mongo
     ports:
-      - 27019:27017
+      - 27017:27017
