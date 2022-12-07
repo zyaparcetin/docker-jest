@@ -1,37 +1,63 @@
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
+const Review = require('./review')
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    unique: true,
+    // unique: true,
     required: true,
   },
   age: {
     type: Number,
     required: true,
   },
-  bio: String,
-  createdAt: {
-    type: Date,
-    default: new Date(),
-  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+      autopopulate: true,
+    },
+  ],
+  basket: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+      autopopulate: true,
+    },
+  ],
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Review',
+      autopopulate: true,
+    },
+  ],
 })
 
 class User {
-  greet(person) {
-    console.log(`Hello ${person.name}, this is ${this.name}`)
+  greet() {
+    console.log(`Hello ${this.name}, welcome to Joy Toys!`)
   }
 
-  get profile() {
-    return `
-# ${this.name} (${this.age})
-Bio: ${this.bio}
-    `
+  async likeProduct(product) {
+    this.likes.push(product)
+    product.likedBy.push(this.name)
+    await this.save()
+    await product.save()
   }
 
-  set profile(newValue) {
-    throw new Error(`profile is only a getter. You can't override it with ${newValue}.`)
+  async addToBasket(product) {
+    this.basket.push(product)
+    await this.save()
+  }
+
+  async review(product, text, rate) {
+    const review = new Review(text, rate, this.name)
+    this.reviews.push(review)
+    product.reviews.push(review)
+    await this.save()
+    await review.save()
   }
 }
 
