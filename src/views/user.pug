@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1 #{user.name} (#{user.age})
+  h2 Products (#{user.likes.length})
+
+  each product in user.likes
+    h3 #{product.filename}
+    if product.likedBy.length == 0
+      p no likes yet! 
+    else 
+      p #{product.likedBy.map(user => user.name).join(', ')}
