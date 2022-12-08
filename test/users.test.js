@@ -64,4 +64,12 @@ describe('User endpoints', () => {
     // expect(createdUser.likes).toContain(userToCreate.likes)
     // expect(createdProduct.likedBy).toContain(productToCreate.likedBy)
   })
+  /* it('user should be able to add a product to basket', async () => {
+    const productToCreate = {
+      name: 'Dog',
+      price: 3,
+    }
+    const createdProduct = await createdUser.addToBasket(createdProduct)
+    expect(createdUser.basket).toContain(createdProduct)
+  }) */
 })
