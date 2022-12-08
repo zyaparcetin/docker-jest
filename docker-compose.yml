@@ -19,3 +19,5 @@ services:
     image: mongo
     ports:
       - 27017:27017
+
+# docker-compose run -e MONGODB_CONNECTION_STRING=mongodb://mongo/joy-toys-local app npm run test-coverage (in another terminal)
