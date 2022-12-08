@@ -21,13 +21,15 @@ describe('User endpoints', () => {
     expect(userExist).toBe(true)
   })
 
-  it('Add a product to basket', async () => {
+  it('user should be able to add a product to basket', async () => {
+    // create a user
     const userToCreate = {
       name: `Somename${Date.now()}`,
       age: 12,
     }
+    // create a product
     const productToCreate = {
-      name: 'Somename',
+      name: `Somename${Date.now()}`,
       price: 15,
     }
 
